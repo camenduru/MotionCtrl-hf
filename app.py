@@ -295,11 +295,14 @@ def fn_traj_reset():
 ###########################################
 model_path='./checkpoints/motionctrl.pth'
 config_path='./configs/inference/config_both.yaml'
+if not os.path.exists(model_path):
+    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P ./checkpoints/')
 
 config = OmegaConf.load(config_path)
 model_config = config.pop("model", OmegaConf.create())
 model = instantiate_from_config(model_config)
-model = model.cuda()
+if torch.cuda.is_available():
+    model = model.cuda()
 
 model = load_model_checkpoint(model, model_path)
 model.eval()
@@ -332,21 +335,29 @@ def model_run(prompts, infer_mode, seed, n_samples):
 
     if infer_mode == MODE[0]:
         camera_poses = RT
-        camera_poses = torch.tensor(camera_poses).float().cuda()
+        camera_poses = torch.tensor(camera_poses).float()
         camera_poses = camera_poses.unsqueeze(0)
         trajs = None
+        if torch.cuda.is_available():
+            camera_poses = camera_poses.cuda()
     elif infer_mode == MODE[1]:
         trajs = traj_flow
-        trajs = torch.tensor(trajs).float().cuda()
+        trajs = torch.tensor(trajs).float()
         trajs = trajs.unsqueeze(0)
         camera_poses = None
+        if torch.cuda.is_available():
+            trajs = trajs.cuda()
     else:
         camera_poses = RT
         trajs = traj_flow
-        camera_poses = torch.tensor(camera_poses).float().cuda()
-        trajs = torch.tensor(trajs).float().cuda()
+        camera_poses = torch.tensor(camera_poses).float()
+        trajs = torch.tensor(trajs).float()
         camera_poses = camera_poses.unsqueeze(0)
         trajs = trajs.unsqueeze(0)
+        if torch.cuda.is_available():
+            camera_poses = camera_poses.cuda()
+            trajs = trajs.cuda()
+
 
     ddim_sampler = DDIMSampler(model)
     batch_size = noise_shape[0]
