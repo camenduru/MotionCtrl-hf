@@ -293,10 +293,10 @@ def fn_traj_reset():
     return "Click to specify trajectory"
 
 ###########################################
-model_path='./checkpoints/motionctrl.pth'
+model_path='./motionctrl.pth'
 config_path='./configs/inference/config_both.yaml'
 if not os.path.exists(model_path):
-    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P ./checkpoints/')
+    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P .')
 
 config = OmegaConf.load(config_path)
 model_config = config.pop("model", OmegaConf.create())
