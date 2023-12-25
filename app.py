@@ -928,12 +928,10 @@ def main(args):
                         traj_droplast = gr.Button(value="Drop Last Point", visible=False)
                 
                 with gr.Column():
-                    # traj_input = gr.Image("assets/traj_layout.png", tool='sketch', source="canvas", 
-                    #                 width=256, height=256,
-                    #                 label="Canvas for Drawing", visible=False)
-                    traj_input = gr.Image("assets/traj_layout.png", source="canvas", 
+                    traj_input = gr.Image("assets/traj_layout.png", tool='sketch', source="canvas", 
                                     width=256, height=256,
                                     label="Canvas for Drawing", visible=False)
+                    
                     vis_traj = gr.Video(value=None, label="Trajectory", visible=False, width=256, height=256)
 
 
