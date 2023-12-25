@@ -296,7 +296,7 @@ def fn_traj_reset():
 model_path='./motionctrl.pth'
 config_path='./configs/inference/config_both.yaml'
 if not os.path.exists(model_path):
-    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P .')
+    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P ./motionctrl.pth')
 
 config = OmegaConf.load(config_path)
 model_config = config.pop("model", OmegaConf.create())
