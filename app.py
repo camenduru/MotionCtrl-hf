@@ -293,10 +293,10 @@ def fn_traj_reset():
     return "Click to specify trajectory"
 
 ###########################################
-model_path='./motionctrl.pth?download=true'
+model_path='./motionctrl.pth'
 config_path='./configs/inference/config_both.yaml'
 if not os.path.exists(model_path):
-    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/resolve/main/motionctrl.pth?download=true -P .')
+    os.system(f'wget https://huggingface.co/TencentARC/MotionCtrl/blob/main/motionctrl.pth -P .')
 
 config = OmegaConf.load(config_path)
 model_config = config.pop("model", OmegaConf.create())
@@ -928,7 +928,10 @@ def main(args):
                         traj_droplast = gr.Button(value="Drop Last Point", visible=False)
                 
                 with gr.Column():
-                    traj_input = gr.Image("assets/traj_layout.png", tool='sketch', source="canvas", 
+                    # traj_input = gr.Image("assets/traj_layout.png", tool='sketch', source="canvas", 
+                    #                 width=256, height=256,
+                    #                 label="Canvas for Drawing", visible=False)
+                    traj_input = gr.Image("assets/traj_layout.png", source="canvas", 
                                     width=256, height=256,
                                     label="Canvas for Drawing", visible=False)
                     vis_traj = gr.Video(value=None, label="Trajectory", visible=False, width=256, height=256)
