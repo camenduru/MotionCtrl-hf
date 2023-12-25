@@ -1,4 +1,3 @@
-
 <div align="center">
 <!-- <h1>AnimateZero</h1> -->
 <h3><b>MotionCtrl</b>: A Unified and Flexible
@@ -80,4 +79,3 @@ If you make use of our work, please cite our paper.
   year={2023}
 }
 ```
-
