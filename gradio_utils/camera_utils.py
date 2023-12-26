@@ -5,7 +5,7 @@ import json
 
 import numpy as np
 
-CAMERA_MOTION_MODE = ["Basic Camera Poses", "Provided Complex Camera Poses", "Customize Camera Poses"]
+CAMERA_MOTION_MODE = ["Basic Camera Poses", "Provided Complex Camera Poses", "Custom Camera Poses"]
 
 CAMERA = {
     # T

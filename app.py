@@ -221,7 +221,7 @@ def display_camera_info(camera_dict, camera_mode=None):
         res = ""
         res += f"motion : {[_ for _ in camera_dict['motion']]}. "
         res += f"speed : {camera_dict['speed']}. "
-        if camera_mode == 'Custom Camera Poses':
+        if camera_mode == CAMERA_MOTION_MODE[2]:
             res += f"mode : {camera_dict['mode']}. "
     return res
 
@@ -241,7 +241,7 @@ def add_camera_motion(camera_motion, camera_mode):
     global camera_dict
     if camera_dict['complex'] is not None:
         camera_dict['complex'] = None
-    if camera_mode == 'Custom Camera Poses' and len(camera_dict['motion']) <2:
+    if camera_mode == CAMERA_MOTION_MODE[2] and len(camera_dict['motion']) <2:
         camera_dict['motion'].append(camera_motion)
     else:
         camera_dict['motion']=[camera_motion]
@@ -833,7 +833,7 @@ def main(args):
                                                         show_label=False, visible=False)
 
                     # step2.3 - camera motion control - custom
-                    custom_camera_motion = gr.Markdown("---\n### Custom Camera Poses", show_label=False, visible=False)
+                    custom_camera_motion = gr.Markdown(f"---\n### {CAMERA_MOTION_MODE[2]}", show_label=False, visible=False)
                     custom_run_status = gr.Markdown(f"\n 1. Click two of the basic camera poses, such as `Pan Up` and `Pan Left`; \
                                                     \n 2. Click `Customized Mode 1: First A then B` or `Customized Mode 1: First A then B` \
                                                     \n - `Customized Mode 1: First A then B`: The camera first `Pan Up` and then `Pan Left`; \
