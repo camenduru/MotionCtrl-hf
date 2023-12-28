@@ -1,7 +1,5 @@
-import os
-os.system("pip uninstall -y torchaudio")
-
 import argparse
+import os
 import tempfile
 from functools import partial
 
