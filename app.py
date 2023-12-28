@@ -1077,11 +1077,15 @@ def main(args):
 
         gr.Markdown(article)
 
-    # demo.launch(server_name='0.0.0.0', share=False, server_port=args.port)
-    demo.queue(concurrency_count=1, max_size=10)
-    demo.launch(share=True)
+    from pyngrok import ngrok, conf
+    NGROK_TOKEN_HERE = os.environ.get('NGROK_TOKEN_HERE')
+    conf.get_default().auth_token = NGROK_TOKEN_HERE
+    public_url = ngrok.connect(7861).public_url
+    print(public_url)
     
-
+    # demo.launch(server_name='0.0.0.0', share=False, server_port=args.port)
+    # demo.queue(concurrency_count=1, max_size=10)
+    demo.queue().launch(server_port=7861, inline=False, share=False, debug=True)
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
