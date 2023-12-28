@@ -1078,8 +1078,8 @@ def main(args):
         gr.Markdown(article)
 
     from pyngrok import ngrok, conf
-    NGROK_TOKEN_HERE = os.environ.get('NGROK_TOKEN_HERE')
-    conf.get_default().auth_token = NGROK_TOKEN_HERE
+    NGROK_TOKEN = os.environ.get('NGROK_TOKEN')
+    conf.get_default().auth_token = NGROK_TOKEN
     public_url = ngrok.connect(7861).public_url
     print(public_url)
     
